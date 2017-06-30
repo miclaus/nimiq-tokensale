@@ -64,11 +64,15 @@
             && typeof data.result === 'string'
             && data.result.trim() !== ''
           ) {
-            var long_eth = data.result.trim();
-            var rlvnt_eth = long_eth.slice(0, 5);
-            var tha_rest = long_eth.slice(5).slice(0, 5);
+            var eth = data.result.trim();
+            var rlvnt_eth = eth.slice(0, 5);
+            var rest_eth = eth.slice(5).slice(0, 5);
+            var curr_eth = Number(rlvnt_eth + '.' + rest_eth);
+            var curr_percent = curr_eth * 100 / 60000;
 
-            $('#token-sale-progress-value').html(rlvnt_eth + '.' + tha_rest + ' / 60000 Ether');
+            $('#token-sale-progress-value').html(
+              curr_eth.toString() + ' / 60000 Ether (~' + curr_percent.toFixed(2) + '%)'
+            );
           }
         });
       }
