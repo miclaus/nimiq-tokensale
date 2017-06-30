@@ -2,6 +2,11 @@
 # nimiq-tokensale (http://www.quarx.io/nimiq)
 # author: iosif miclaus
 # version: 0.5.0
+
+// constants
+define('REFRESH_SECONDS', 20);
+
+// ...
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,8 +36,8 @@
   <h1>Nimiq Token Sale Live Progress</h1>
   <p id="token-sale-progress-value">loading ...</p>
   <div class="hint">
-    <span id="refreshing-progress">refresh in 10 seconds</span>
-    <span>(<a href="http://www.quarx.io/nimiq">refresh now</a>)</span>
+    <span id="refreshing-progress">refresh in <?php echo REFRESH_SECONDS ?> seconds</span>
+    <span>(<a href=".">refresh now</a>)</span>
   </div>
   <p class="hint">
     <a href="https://etherscan.io/address/0xcfb98637bcae43c13323eaa1731ced2b716962fd">see more</a>
@@ -46,18 +51,21 @@
 
       make_api_call();
 
-      var curr_refresh_progress = 11;
+      var curr_refresh_seconds = <?php echo REFRESH_SECONDS ?>;
       setInterval(function() {
-        curr_refresh_progress--;
+        if ( curr_refresh_seconds > 0 ) {
+          var seconds = 'seconds';
+          if ( curr_refresh_seconds === 1 ) { seconds = 'second' }
 
-        if ( curr_refresh_progress > 0 ) {
-          var seconds = curr_refresh_progress > 1 ? 'seconds' : 'second';
-          $('#refreshing-progress').html('refresh in ' + curr_refresh_progress + ' ' + seconds);
-        } else {
+          $('#refreshing-progress').html('refresh in ' + curr_refresh_seconds + ' ' + seconds);
+        }
+        else {
           $('#refreshing-progress').html('refreshing ...');
           make_api_call();
-          curr_refresh_progress = 11;
+          curr_refresh_seconds = <?php echo REFRESH_SECONDS ?>;
         }
+
+        curr_refresh_seconds--;
       }, 1000);
 
       function make_api_call() {
