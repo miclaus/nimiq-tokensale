@@ -22,26 +22,74 @@ define('REFRESH_SECONDS', 20);
     crossorigin="anonymous"
   ></script>
 
+  <!-- <link href="css/reset.css" rel="stylesheet"> -->
+  <link href="css/main.css" rel="stylesheet">
+
   <style>
     html, body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
       font-size: 16px;
+      margin: 0;
     }
     .hint {
       font-size: 0.8rem;
     }
+    #tokensale {
+      position: absolute;
+      z-index: 99;
+      padding: 1rem;
+    }
   </style>
 </head>
 <body>
-  <h1>Nimiq Token Sale Live Progress</h1>
-  <p id="token-sale-progress-value">loading ...</p>
-  <div class="hint">
-    <span id="refreshing-progress">refresh in <?php echo REFRESH_SECONDS ?> seconds</span>
-    <span>(<a href=".">refresh now</a>)</span>
+  <div id="tokensale">
+    <h1>Nimiq Token Sale Live Progress</h1>
+    <p id="token-sale-progress-value">loading ...</p>
+    <div class="hint">
+      <span id="refreshing-progress">refresh in <?php echo REFRESH_SECONDS ?> seconds</span>
+      <span>(<a href=".">refresh now</a>)</span>
+    </div>
+    <p class="hint">
+      <a href="https://etherscan.io/address/0xcfb98637bcae43c13323eaa1731ced2b716962fd">see more</a>
+    </p>
   </div>
-  <p class="hint">
-    <a href="https://etherscan.io/address/0xcfb98637bcae43c13323eaa1731ced2b716962fd">see more</a>
-  </p>
+  <div id="gamecontainer">
+     <div id="gamescreen">
+        <div id="sky" class="animated">
+           <div id="flyarea">
+              <div id="ceiling" class="animated"></div>
+              <!-- This is the flying and pipe area container -->
+              <div id="player" class="bird animated"></div>
+
+              <div id="bigscore"></div>
+
+              <div id="splash"></div>
+
+              <div id="scoreboard">
+                 <div id="medal"></div>
+                 <div id="currentscore"></div>
+                 <div id="highscore"></div>
+                 <div id="replay"><img src="assets/replay.png" alt="replay"></div>
+              </div>
+
+              <!-- Pipes go here! -->
+           </div>
+        </div>
+        <div id="land" class="animated"><div id="debug"></div></div>
+     </div>
+  </div>
+  <div id="footer">
+    <a href="http://www.dotgears.com/">original game/concept/art by dong nguyen</a>
+    <a href="http://nebezb.com/">recreated by nebez briefkani</a>
+    <a href="http://github.com/nebez/floppybird/">view github project</a>
+  </div>
+  <div class="boundingbox" id="playerbox"></div>
+  <div class="boundingbox" id="pipebox"></div>
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/jquery.transit.min.js"></script>
+  <script src="js/buzz.min.js"></script>
+  <script src="js/main.js"></script>
 
   <script>
     $(document).ready(function() {
