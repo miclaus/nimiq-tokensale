@@ -1,5 +1,7 @@
-<?php # author: iosif miclaus
-  // ..
+<?php
+# nimiq-tokensale (http://www.quarx.io/nimiq)
+# author: iosif miclaus
+# version: 0.5.0
 ?>
 <!DOCTYPE html>
 <html lang="en">
